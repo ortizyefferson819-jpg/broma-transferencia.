@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXI</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.pantalla {
+    width: 100%;
+    min-height: 100vh;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 25px;
+}
+
+.logo {
+    font-size: 45px;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.circulo {
+    width: 55px;
+    height: 55px;
+
+    border: 5px solid #ddd;
+    border-top: 5px solid #111;
+
+    border-radius: 50%;
+
+    animation: girar 1s linear infinite;
+
+    margin: 0 auto 25px;
+}
+
+@keyframes girar {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+h1 {
+    font-size: 25px;
+}
+
+.gris {
+    color: #777;
+}
+
+#transferencia,
+#exito,
+#broma {
+
+    display: none;
+
+    width: 100%;
+    max-width: 450px;
+}
+
+.valor {
+
+    font-size: 42px;
+    font-weight: bold;
+
+    margin: 25px 0 10px;
+}
+
+.puntos {
+
+    font-size: 30px;
+
+    letter-spacing: 8px;
+
+    animation: parpadear 1s infinite;
+}
+
+@keyframes parpadear {
+
+    50% {
+        opacity: 0.3;
+    }
+
+}
+
+.cancelar {
+
+    margin-top: 45px;
+
+    padding: 16px 25px;
+
+    background: white;
+
+    border: 2px solid #111;
+
+    border-radius: 12px;
+
+    font-size: 17px;
+}
+
+#botonExtra {
+
+    display: none;
+
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: #111;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 15px;
+
+    padding: 18px 25px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    z-index: 10;
+}
+
+.listo {
+
+    background: #111;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 15px 35px;
+
+    font-size: 18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="pantalla">
+
+<div id="carga">
+
+<div class="logo">
+NEXI
+</div>
+
+<div class="circulo"></div>
+
+<h1>
+Cargando...
+</h1>
+
+<p class="gris">
+Preparando transferencia
+</p>
+
+</div>
+
+
+<div id="transferencia">
+
+<div class="logo">
+NEXI
+</div>
+
+<h1>
+Transfiriendo dinero
+</h1>
+
+<div class="valor">
+$50.000
+</div>
+
+<p class="gris">
+Procesando transferencia
+</p>
+
+<div class="puntos">
+•••
+</div>
+
+<button
+class="cancelar"
+onclick="cancelar()">
+
+Cancelar envío
+
+</button>
+
+</div>
+
+
+<button
+id="botonExtra"
+onclick="cancelar()">
+
+Enviar $10.000 más
+
+</button>
+
+
+<div id="exito">
+
+<div class="logo">
+NEXI
+</div>
+
+<h1>
+✅ Transferencia exitosa
+</h1>
+
+<p class="gris">
+La operación ha sido procesada correctamente.
+</p>
+
+<button
+class="listo"
+onclick="mostrarBroma()">
+
+Listo
+
+</button>
+
+</div>
+
+
+<div id="broma">
+
+<h1>
+😂 JAJAJA
+</h1>
+
+<h2>
+¡CAÍSTE!
+</h2>
+
+<p>
+No se transfirió ningún dinero.
+</p>
+
+<p>
+Era solamente una broma 😎
+</p>
+
+</div>
+
+</div>
+
+
+<script>
+
+let intentos = 0;
+
+
+setTimeout(function() {
+
+document.getElementById("carga").style.display = "none";
+
+document.getElementById("transferencia").style.display = "block";
+
+}, 3000);
+
+
+function cancelar() {
+
+intentos++;
+
+let boton =
+document.getElementById("botonExtra");
+
+boton.style.display = "block";
+
+document.querySelector(".cancelar")
+.style.display = "none";
+
+
+if (intentos == 1) {
+
+boton.style.fontSize = "18px";
+
+boton.style.padding =
+"18px 25px";
+
+}
+
+
+if (intentos == 2) {
+
+boton.style.fontSize = "25px";
+
+boton.style.padding =
+"25px 35px";
+
+}
+
+
+if (intentos == 3) {
+
+boton.style.fontSize = "32px";
+
+boton.style.padding =
+"35px 45px";
+
+}
+
+
+if (intentos >= 4) {
+
+boton.style.fontSize = "45px";
+
+boton.style.padding =
+"60px 45px";
+
+
+setTimeout(function() {
+
+document.getElementById(
+"transferencia"
+).style.display = "none";
+
+
+boton.style.display = "none";
+
+
+document.getElementById(
+"exito"
+).style.display = "block";
+
+}, 1500);
+
+}
+
+}
+
+
+function mostrarBroma() {
+
+document.getElementById(
+"exito"
+).style.display = "none";
+
+
+document.getElementById(
+"broma"
+).style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

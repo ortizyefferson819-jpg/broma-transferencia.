@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NEXI</title>
 
 <style>
@@ -13,9 +14,8 @@
 
 body {
     margin: 0;
-    background: #f5f5f5;
     font-family: Arial, sans-serif;
-    min-height: 100vh;
+    background: #f7f7f7;
     overflow: hidden;
 }
 
@@ -23,37 +23,42 @@ body {
     width: 100%;
     min-height: 100vh;
     background: white;
-
     display: flex;
-    align-items: center;
     justify-content: center;
-
+    align-items: center;
     text-align: center;
     padding: 25px;
 }
 
+.contenido {
+    width: 100%;
+    max-width: 450px;
+}
+
 .logo {
-    font-size: 45px;
+    font-size: 48px;
     font-weight: bold;
+    color: #e5007d;
     margin-bottom: 25px;
 }
 
-.circulo {
-    width: 55px;
-    height: 55px;
+.verde {
+    color: #16a34a;
+    font-weight: bold;
+}
 
-    border: 5px solid #ddd;
-    border-top: 5px solid #111;
-
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #eee;
+    border-top: 6px solid #e5007d;
+    border-right: 6px solid #16a34a;
     border-radius: 50%;
-
     animation: girar 1s linear infinite;
-
-    margin: 0 auto 25px;
+    margin: auto;
 }
 
 @keyframes girar {
-
     from {
         transform: rotate(0deg);
     }
@@ -61,7 +66,6 @@ body {
     to {
         transform: rotate(360deg);
     }
-
 }
 
 h1 {
@@ -72,97 +76,104 @@ h1 {
     color: #777;
 }
 
-#transferencia,
-#exito,
-#broma {
-
+.oculto {
     display: none;
-
-    width: 100%;
-    max-width: 450px;
 }
 
 .valor {
-
-    font-size: 42px;
+    font-size: 44px;
     font-weight: bold;
-
+    color: #111;
     margin: 25px 0 10px;
 }
 
 .puntos {
-
-    font-size: 30px;
-
+    font-size: 32px;
     letter-spacing: 8px;
-
+    color: #e5007d;
     animation: parpadear 1s infinite;
 }
 
 @keyframes parpadear {
-
     50% {
         opacity: 0.3;
     }
+}
 
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
 }
 
 .cancelar {
-
-    margin-top: 45px;
-
-    padding: 16px 25px;
-
+    padding: 15px 18px;
     background: white;
-
+    color: #111;
     border: 2px solid #111;
-
     border-radius: 12px;
-
-    font-size: 17px;
+    font-size: 16px;
 }
 
-#botonExtra {
+.extra {
+    padding: 15px 18px;
+    background: #e5007d;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
 
+#botonGrande {
     display: none;
-
     position: fixed;
-
     left: 50%;
     top: 50%;
-
     transform: translate(-50%, -50%);
-
-    background: #111;
-
+    background: #e5007d;
     color: white;
-
     border: none;
-
-    border-radius: 15px;
-
-    padding: 18px 25px;
-
-    font-size: 18px;
-
+    border-radius: 18px;
+    padding: 20px 25px;
+    font-size: 20px;
     font-weight: bold;
+    z-index: 20;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
 
-    z-index: 10;
+.exito h1 {
+    color: #16a34a;
+}
+
+.exito-icono {
+    font-size: 70px;
 }
 
 .listo {
-
-    background: #111;
-
+    background: #16a34a;
     color: white;
-
     border: none;
-
     border-radius: 12px;
-
-    padding: 15px 35px;
-
+    padding: 16px 40px;
     font-size: 18px;
+    font-weight: bold;
+}
+
+.broma h1 {
+    color: #e5007d;
+    font-size: 40px;
+}
+
+.broma h2 {
+    font-size: 32px;
+}
+
+.broma p {
+    font-size: 19px;
 }
 
 </style>
@@ -172,13 +183,17 @@ h1 {
 
 <div class="pantalla">
 
+<div class="contenido">
+
+<!-- CARGA -->
+
 <div id="carga">
 
 <div class="logo">
 NEXI
 </div>
 
-<div class="circulo"></div>
+<div class="spinner"></div>
 
 <h1>
 Cargando...
@@ -191,7 +206,9 @@ Preparando transferencia
 </div>
 
 
-<div id="transferencia">
+<!-- TRANSFERENCIA -->
+
+<div id="transferencia" class="oculto">
 
 <div class="logo">
 NEXI
@@ -213,38 +230,56 @@ Procesando transferencia
 •••
 </div>
 
+<div class="botones">
+
 <button
 class="cancelar"
-onclick="cancelar()">
+id="cancelar"
+onclick="cancelarEnvio()">
 
 Cancelar envío
 
 </button>
 
+<button
+class="extra"
+id="extra"
+onclick="enviarMas()">
+
+Enviar $10.000 más
+
+</button>
+
+</div>
+
 </div>
 
 
+<!-- BOTÓN GRANDE -->
+
 <button
-id="botonExtra"
-onclick="cancelar()">
+id="botonGrande"
+onclick="pagar()">
 
 Enviar $10.000 más
 
 </button>
 
 
-<div id="exito">
+<!-- ÉXITO -->
 
-<div class="logo">
-NEXI
+<div id="exito" class="exito oculto">
+
+<div class="exito-icono">
+✅
 </div>
 
 <h1>
-✅ Transferencia exitosa
+Pago exitoso
 </h1>
 
 <p class="gris">
-La operación ha sido procesada correctamente.
+La operación fue procesada correctamente.
 </p>
 
 <button
@@ -258,7 +293,9 @@ Listo
 </div>
 
 
-<div id="broma">
+<!-- BROMA -->
+
+<div id="broma" class="broma oculto">
 
 <h1>
 😂 JAJAJA
@@ -280,11 +317,15 @@ Era solamente una broma 😎
 
 </div>
 
+</div>
+
 
 <script>
 
 let intentos = 0;
 
+
+/* CARGA */
 
 setTimeout(function() {
 
@@ -295,88 +336,97 @@ document.getElementById("transferencia").style.display = "block";
 }, 3000);
 
 
-function cancelar() {
+/* CANCELAR ENVÍO */
+
+function cancelarEnvio() {
+
+document.getElementById("cancelar").style.display = "none";
+
+document.getElementById("extra").style.display = "block";
+
+}
+
+
+/* ENVIAR MÁS */
+
+function enviarMas() {
 
 intentos++;
 
 let boton =
-document.getElementById("botonExtra");
+document.getElementById("extra");
 
-boton.style.display = "block";
 
-document.querySelector(".cancelar")
-.style.display = "none";
-
+/* Cada clic lo hace más grande */
 
 if (intentos == 1) {
 
-boton.style.fontSize = "18px";
-
-boton.style.padding =
-"18px 25px";
+boton.style.fontSize = "19px";
+boton.style.padding = "18px 25px";
 
 }
-
 
 if (intentos == 2) {
 
-boton.style.fontSize = "25px";
-
-boton.style.padding =
-"25px 35px";
+boton.style.fontSize = "23px";
+boton.style.padding = "23px 30px";
 
 }
-
 
 if (intentos == 3) {
 
-boton.style.fontSize = "32px";
-
-boton.style.padding =
-"35px 45px";
+boton.style.fontSize = "28px";
+boton.style.padding = "30px 38px";
 
 }
 
+if (intentos == 4) {
 
-if (intentos >= 4) {
+boton.style.fontSize = "35px";
+boton.style.padding = "40px 45px";
 
-boton.style.fontSize = "45px";
+}
 
-boton.style.padding =
-"60px 45px";
+if (intentos >= 5) {
 
+/* Ocultar todo lo demás */
 
-setTimeout(function() {
+document.getElementById("transferencia").style.display = "none";
 
-document.getElementById(
-"transferencia"
-).style.display = "none";
+/* Mostrar botón enorme */
 
+let grande =
+document.getElementById("botonGrande");
 
-boton.style.display = "none";
+grande.style.display = "block";
 
+grande.style.fontSize = "42px";
 
-document.getElementById(
-"exito"
-).style.display = "block";
-
-}, 1500);
+grande.style.padding = "65px 45px";
 
 }
 
 }
 
+
+/* PAGO EXITOSO */
+
+function pagar() {
+
+document.getElementById("botonGrande").style.display = "none";
+
+document.getElementById("exito").style.display = "block";
+
+}
+
+
+/* BROMA FINAL */
 
 function mostrarBroma() {
 
-document.getElementById(
-"exito"
-).style.display = "none";
+document.getElementById("exito").style.display = "none";
 
-
-document.getElementById(
-"broma"
-).style.display = "block";
+document.getElementById("broma").style.display = "block";
 
 }
 

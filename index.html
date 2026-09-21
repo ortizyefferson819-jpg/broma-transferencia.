@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXI</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -15,54 +13,44 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f7f7f7;
-    overflow: hidden;
+    background: #f4f4f4;
+    color: #222;
 }
 
 .pantalla {
-    width: 100%;
     min-height: 100vh;
     background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 25px;
+    padding: 20px;
 }
 
 .contenido {
     width: 100%;
-    max-width: 450px;
+    max-width: 430px;
 }
 
 .logo {
     font-size: 48px;
-    font-weight: bold;
+    font-weight: 900;
     color: #e5007d;
-    margin-bottom: 25px;
-}
-
-.verde {
-    color: #16a34a;
-    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .spinner {
-    width: 60px;
-    height: 60px;
-    border: 6px solid #eee;
-    border-top: 6px solid #e5007d;
-    border-right: 6px solid #16a34a;
+    width: 65px;
+    height: 65px;
+    border: 6px solid #eeeeee;
+    border-top-color: #e5007d;
+    border-right-color: #19a94b;
     border-radius: 50%;
-    animation: girar 1s linear infinite;
-    margin: auto;
+    animation: girar 0.9s linear infinite;
+    margin: 0 auto 25px;
 }
 
 @keyframes girar {
-    from {
-        transform: rotate(0deg);
-    }
-
     to {
         transform: rotate(360deg);
     }
@@ -70,6 +58,11 @@ body {
 
 h1 {
     font-size: 25px;
+    margin: 12px 0;
+}
+
+h2 {
+    margin: 10px 0;
 }
 
 .gris {
@@ -77,131 +70,154 @@ h1 {
 }
 
 .oculto {
-    display: none;
+    display: none !important;
+}
+
+.tarjeta {
+    background: #fff;
+    border-radius: 22px;
+    padding: 25px 18px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.08);
 }
 
 .valor {
-    font-size: 44px;
-    font-weight: bold;
-    color: #111;
-    margin: 25px 0 10px;
+    font-size: 45px;
+    font-weight: 900;
+    margin: 22px 0 8px;
 }
 
 .puntos {
-    font-size: 32px;
-    letter-spacing: 8px;
     color: #e5007d;
-    animation: parpadear 1s infinite;
+    font-size: 30px;
+    letter-spacing: 7px;
+    animation: puntos 1s infinite;
 }
 
-@keyframes parpadear {
+@keyframes puntos {
     50% {
-        opacity: 0.3;
+        opacity: .25;
     }
 }
 
 .botones {
     display: flex;
-    justify-content: center;
     gap: 10px;
-    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+button {
+    font-family: Arial, sans-serif;
+    cursor: pointer;
 }
 
 .cancelar {
-    padding: 15px 18px;
     background: white;
-    color: #111;
-    border: 2px solid #111;
+    border: 2px solid #222;
+    color: #222;
     border-radius: 12px;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 15px;
 }
 
 .extra {
-    padding: 15px 18px;
     background: #e5007d;
     color: white;
-    border: none;
+    border: 0;
     border-radius: 12px;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 15px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: .35s;
 }
 
-#botonGrande {
-    display: none;
+.extra:hover {
+    transform: scale(1.03);
+}
+
+#botonFinal {
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     background: #e5007d;
     color: white;
-    border: none;
-    border-radius: 18px;
-    padding: 20px 25px;
-    font-size: 20px;
-    font-weight: bold;
-    z-index: 20;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    border: 0;
+    border-radius: 20px;
+    font-weight: 900;
+    box-shadow: 0 10px 35px rgba(0,0,0,.25);
+    transition: .4s;
+    z-index: 50;
+}
+
+.exitoIcono {
+    font-size: 75px;
+    margin-bottom: 10px;
 }
 
 .exito h1 {
-    color: #16a34a;
-}
-
-.exito-icono {
-    font-size: 70px;
+    color: #19a94b;
+    font-size: 32px;
 }
 
 .listo {
-    background: #16a34a;
+    margin-top: 25px;
+    background: #19a94b;
     color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 40px;
+    border: 0;
+    border-radius: 13px;
+    padding: 16px 45px;
     font-size: 18px;
     font-weight: bold;
 }
 
 .broma h1 {
     color: #e5007d;
-    font-size: 40px;
+    font-size: 44px;
 }
 
 .broma h2 {
-    font-size: 32px;
+    font-size: 34px;
 }
 
 .broma p {
     font-size: 19px;
 }
 
+@media (max-width: 430px) {
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .cancelar,
+    .extra {
+        width: 100%;
+    }
+
+}
 </style>
 </head>
 
 <body>
 
 <div class="pantalla">
-
 <div class="contenido">
 
-<!-- CARGA -->
+<!-- CARGANDO -->
 
 <div id="carga">
 
-<div class="logo">
-NEXI
-</div>
+    <div class="logo">NEXI</div>
 
-<div class="spinner"></div>
+    <div class="spinner"></div>
 
-<h1>
-Cargando...
-</h1>
+    <h1>Cargando...</h1>
 
-<p class="gris">
-Preparando transferencia
-</p>
+    <p class="gris">
+        Preparando transferencia
+    </p>
 
 </div>
 
@@ -210,58 +226,57 @@ Preparando transferencia
 
 <div id="transferencia" class="oculto">
 
-<div class="logo">
-NEXI
+    <div class="tarjeta">
+
+        <div class="logo">NEXI</div>
+
+        <h1>
+            Transfiriendo dinero
+        </h1>
+
+        <div class="valor">
+            $50.000
+        </div>
+
+        <p class="gris">
+            Procesando transferencia
+        </p>
+
+        <div class="puntos">
+            •••
+        </div>
+
+        <div class="botones">
+
+            <button
+                id="cancelar"
+                class="cancelar"
+                onclick="cancelar()">
+                Cancelar envío
+            </button>
+
+            <button
+                id="extra"
+                class="extra"
+                onclick="crecer()">
+                Enviar $10.000 más
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
-<h1>
-Transfiriendo dinero
-</h1>
 
-<div class="valor">
-$50.000
-</div>
-
-<p class="gris">
-Procesando transferencia
-</p>
-
-<div class="puntos">
-•••
-</div>
-
-<div class="botones">
+<!-- BOTÓN FINAL -->
 
 <button
-class="cancelar"
-id="cancelar"
-onclick="cancelarEnvio()">
+    id="botonFinal"
+    class="oculto"
+    onclick="pagoExitoso()">
 
-Cancelar envío
-
-</button>
-
-<button
-class="extra"
-id="extra"
-onclick="enviarMas()">
-
-Enviar $10.000 más
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- BOTÓN GRANDE -->
-
-<button
-id="botonGrande"
-onclick="pagar()">
-
-Enviar $10.000 más
+    Enviar $10.000 más
 
 </button>
 
@@ -270,25 +285,25 @@ Enviar $10.000 más
 
 <div id="exito" class="exito oculto">
 
-<div class="exito-icono">
-✅
-</div>
+    <div class="exitoIcono">
+        ✅
+    </div>
 
-<h1>
-Pago exitoso
-</h1>
+    <h1>
+        Pago exitoso
+    </h1>
 
-<p class="gris">
-La operación fue procesada correctamente.
-</p>
+    <p class="gris">
+        La operación fue procesada correctamente.
+    </p>
 
-<button
-class="listo"
-onclick="mostrarBroma()">
+    <button
+        class="listo"
+        onclick="broma()">
 
-Listo
+        Listo
 
-</button>
+    </button>
 
 </div>
 
@@ -297,136 +312,128 @@ Listo
 
 <div id="broma" class="broma oculto">
 
-<h1>
-😂 JAJAJA
-</h1>
+    <h1>
+        😂 JAJAJA
+    </h1>
 
-<h2>
-¡CAÍSTE!
-</h2>
+    <h2>
+        ¡CAÍSTE!
+    </h2>
 
-<p>
-No se transfirió ningún dinero.
-</p>
+    <p>
+        No se transfirió ningún dinero.
+    </p>
 
-<p>
-Era solamente una broma 😎
-</p>
-
-</div>
+    <p>
+        Era solamente una broma 😎
+    </p>
 
 </div>
 
+</div>
 </div>
 
 
 <script>
 
-let intentos = 0;
+let clics = 0;
 
 
-/* CARGA */
+/* CARGA INICIAL */
 
-setTimeout(function() {
+setTimeout(() => {
 
-document.getElementById("carga").style.display = "none";
+    document.getElementById("carga")
+        .classList.add("oculto");
 
-document.getElementById("transferencia").style.display = "block";
+    document.getElementById("transferencia")
+        .classList.remove("oculto");
 
 }, 3000);
 
 
-/* CANCELAR ENVÍO */
+/* CANCELAR */
 
-function cancelarEnvio() {
+function cancelar() {
 
-document.getElementById("cancelar").style.display = "none";
-
-document.getElementById("extra").style.display = "block";
-
-}
-
-
-/* ENVIAR MÁS */
-
-function enviarMas() {
-
-intentos++;
-
-let boton =
-document.getElementById("extra");
-
-
-/* Cada clic lo hace más grande */
-
-if (intentos == 1) {
-
-boton.style.fontSize = "19px";
-boton.style.padding = "18px 25px";
-
-}
-
-if (intentos == 2) {
-
-boton.style.fontSize = "23px";
-boton.style.padding = "23px 30px";
-
-}
-
-if (intentos == 3) {
-
-boton.style.fontSize = "28px";
-boton.style.padding = "30px 38px";
-
-}
-
-if (intentos == 4) {
-
-boton.style.fontSize = "35px";
-boton.style.padding = "40px 45px";
-
-}
-
-if (intentos >= 5) {
-
-/* Ocultar todo lo demás */
-
-document.getElementById("transferencia").style.display = "none";
-
-/* Mostrar botón enorme */
-
-let grande =
-document.getElementById("botonGrande");
-
-grande.style.display = "block";
-
-grande.style.fontSize = "42px";
-
-grande.style.padding = "65px 45px";
-
-}
+    document.getElementById("cancelar")
+        .style.display = "none";
 
 }
 
 
-/* PAGO EXITOSO */
+/* CRECER */
 
-function pagar() {
+function crecer() {
 
-document.getElementById("botonGrande").style.display = "none";
+    clics++;
 
-document.getElementById("exito").style.display = "block";
+    const boton =
+        document.getElementById("extra");
+
+    const tamaños = [
+        ["17px", "17px"],
+        ["20px", "20px"],
+        ["24px", "25px"],
+        ["29px", "32px"],
+        ["35px", "40px"]
+    ];
+
+    const posicion =
+        Math.min(clics - 1, tamaños.length - 1);
+
+    boton.style.fontSize =
+        tamaños[posicion][0];
+
+    boton.style.padding =
+        `${12 + clics * 6}px ${18 + clics * 7}px`;
+
+    boton.style.borderRadius =
+        `${12 + clics}px`;
+
+    /* Después de varios clics */
+
+    if (clics >= 5) {
+
+        document.getElementById("transferencia")
+            .classList.add("oculto");
+
+        const final =
+            document.getElementById("botonFinal");
+
+        final.classList.remove("oculto");
+
+        final.style.fontSize = "40px";
+
+        final.style.padding = "65px 45px";
+
+    }
 
 }
 
 
-/* BROMA FINAL */
+/* PAGO */
 
-function mostrarBroma() {
+function pagoExitoso() {
 
-document.getElementById("exito").style.display = "none";
+    document.getElementById("botonFinal")
+        .classList.add("oculto");
 
-document.getElementById("broma").style.display = "block";
+    document.getElementById("exito")
+        .classList.remove("oculto");
+
+}
+
+
+/* BROMA */
+
+function broma() {
+
+    document.getElementById("exito")
+        .classList.add("oculto");
+
+    document.getElementById("broma")
+        .classList.remove("oculto");
 
 }
 
